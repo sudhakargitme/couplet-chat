@@ -1,0 +1,30 @@
+vesrion: 0.0
+os: linux
+files: 
+  - source: /
+    destination: /usr/couplet
+    overwrite: true
+permissions: 
+  - object: /usr/couplet/codedeploy_scripts
+    pattern: "*.sh" 
+    owner: root
+    group: root
+    mode: 755
+    type:
+      - files
+hooks:
+  BeforeInstall:
+    - location: codedeploy_scripts/before_install.sh
+      timeout: 180
+  AfterInstall:
+    - location: codedeploy_scripts/after_install.sh
+      timeout: 180      
+  ApplicationStrat:
+    - location: codedeploy_scripts/app_start.sh
+      timeout: 180          
+  ApplicationStop:
+    - location: codedeploy_scripts/app_stop.sh
+      timeout: 180 
+  ValidateService:
+    - location: codedeploy_scripts/validate_service.sh
+      timeout: 180 
